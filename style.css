@@ -139,6 +139,7 @@ ul li:hover {
 #result {
     border-collapse: collapse;
     width: 100%;
+    overflow-x: auto;
 }
 
 #result td,
