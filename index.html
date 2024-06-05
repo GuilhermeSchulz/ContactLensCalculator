@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de lentes de contato</title>
+    <script src="data.js" defer></script>
+    <script src="index.js" defer></script>
+    <script src="calculator.js" defer></script>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Conversão de Prescrição de Óculos para Lentes de Contato</h1>
+    <form id="prescriptionForm">
+        <div>
+            <p class="lens_type_label">Tipo de Lente:</p>
+
+            <div class="form-group form-radio">
+
+                <div class="form-radio">
+                    <input checked type="radio" name="lensType" id="Miopia">
+                    <label for="miopia">Miopia</label>
+                </div>
+                <div class="form-radio">
+                    <input type="radio" name="lensType" id="Hipermetropia">
+                    <label for="hipermetropia">Hipermetropia</label>
+                </div>
+                <div class="form-radio">
+                    <input type="radio" name="lensType" id="Astigmatismo">
+                    <label for="astigmatismo">Astigmatismo</label>
+                </div>
+            </div>
+        </div>
+        <h2>Olho direito:</h2>
+        <div class="container_eyes">
+            <div class="form-group">
+                <label for="odSph">Esférico:</label>
+                <input id="odSph" name="odSph" type="text" readonly value="0">
+                <div class="container_sphere_od">
+                    <ul class="list_sphere_od">
+                        <span class="styled-option option_odSph" data-value="0">0</span>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="odCyl">Cilíndrico:</label>
+                <input id="odCyl" name="odCyl" type="text" readonly value="0">
+                <div class="container_cyl_od">
+                    <ul class="list_cyl_od"></ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="odAxis">Eixo:</label>
+                <input id="odAxis" name="odAxis" type="text" readonly value="0">
+                <div class="container_axis_od">
+                    <ul class="list_axis_od"></ul>
+                </div>
+            </div>
+        </div>
+        <h2>Olho esquerdo:</h2>
+        <div class="container_eyes">
+
+            <div class="form-group">
+                <label for="osSph"> Esférico:</label>
+                <input id="osSph" name="osSph" type="text" readonly value="0">
+                <div class="container_sphere_os">
+                    <ul class="list_sphere_os"></ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="osCyl"> Cilíndrico:</label>
+                <input id="osCyl" name="osCyl" type="text" readonly value="0">
+                <div class="container_cyl_os">
+                    <ul class="list_cyl_os"></ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="osAxis"> Eixo:</label>
+                <input id="osAxis" name="osAxis" type="text" readonly value="0">
+                <div class="container_axis_os">
+                    <ul class="list_axis_os"></ul>
+                </div>
+            </div>
+        </div>
+
+        <button class="submit_button" type="submit">Converter</button>
+    </form>
+
+    <div class="result" id="result">
+        <h2>Prescrição Convertida:</h2>
+    </div>
+</body>
+
+</html>

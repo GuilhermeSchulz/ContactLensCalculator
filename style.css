@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.container_eyes {
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.container_sphere_od,
+.container_sphere_os,
+.container_cyl_od,
+.container_cyl_os,
+.container_axis_od,
+.container_axis_os {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    background-color: #fff;
+    z-index: 1;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+ul li:hover {
+    background-color: #f0f0f0;
+}
+
+.styled-option {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.form-radio {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.form-radio input {
+    margin-right: 15px;
+}
+
+.submit_button {
+    margin-top: 20px;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.lens_type_label {
+    margin-right: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+}
+
+.result {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+#result {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#result td,
+#result th {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#result tr {
+    border-spacing: 0;
+}
+
+#result tbody {
+    display: block;
+}
+
+.empty {
+    border: none !important;
+}
