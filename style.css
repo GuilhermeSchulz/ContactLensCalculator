@@ -23,6 +23,7 @@ form {
 
 .form-group {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .form-group label {
@@ -156,4 +157,47 @@ ul li:hover {
 
 .empty {
     border: none !important;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        margin: 0;
+    }
+
+    form {
+        max-width: 100%;
+    }
+
+    .radio_container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-group label {
+        font-size: 16px;
+    }
+
+    .form-group input {
+        padding: 8px;
+    }
+
+
+
+    .result {
+        padding: 10px;
+    }
+
+    .submit_button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .lens_type_label {
+        font-size: 16px;
+    }
+
+    #result td,
+    #result th {
+        padding: 8px;
+    }
 }
