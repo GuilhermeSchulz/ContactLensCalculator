@@ -53,6 +53,7 @@ document
     const osSph = parseFloat(document.getElementById("osSph").value) || 0;
     const osCyl = parseFloat(document.getElementById("osCyl").value) || 0;
     const osAxis = parseInt(document.getElementById("osAxis").value) || 0;
+    const prescription = document.getElementById("prescription");
     const lensType = document.querySelector(
       'input[name="lensType"]:checked'
     ).id;
@@ -93,6 +94,8 @@ document
         <tr> 
           <td><strong>Presbiopia:</strong></td>
           <td>${Presbiopia ? "Sim" : "Não"}</td>
+          <td>${prescription ? prescription.value : ""}</td>
+
         </tr>
 
        
