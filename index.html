@@ -19,27 +19,37 @@
         <div>
             <p class="lens_type_label">Tipo de Lente:</p>
 
-            <div class="form-group radio_container form-radio">
+            <div class="form-group radio_container">
 
                 <div class="form-radio">
                     <input checked type="radio" name="lensType" id="Miopia">
                     <label for="miopia">Miopia</label>
                 </div>
+                <span class="divisor"></span>
                 <div class="form-radio">
                     <input type="radio" name="lensType" id="Hipermetropia">
                     <label for="hipermetropia">Hipermetropia</label>
                 </div>
+
+            </div>
+            <div class="form-group radio_container" style="border-bottom: 1px solid #ccc">
                 <div class="form-radio">
-                    <input type="radio" name="lensType" id="Astigmatismo">
-                    <label for="astigmatismo">Astigmatismo</label>
+                    <input type="checkbox" name="Astigmatismo" id="Astigmatismo">
+                    <label for="Astigmatismo">Astigmatismo</label>
                 </div>
+                <span class="divisor"></span>
+                <div class="form-radio">
+                    <input type="checkbox" name="Presbiopia" id="Presbiopia">
+                    <label for="Presbiopia">Presbiopia</label>
+                </div>
+
             </div>
         </div>
-        <h2>Olho direito:</h2>
+        <h2 class="lens_type_label">Olho direito:</h2>
         <div class="container_eyes">
             <div class="form-group">
                 <label for="odSph">Esférico:</label>
-                <input id="odSph" name="odSph" type="text" readonly value="0">
+                <input id="odSph" name="odSph" type="text" readonly value="0.00">
                 <div class="container_sphere_od">
                     <ul class="list_sphere_od">
                         <span class="styled-option option_odSph" data-value="0">0</span>
@@ -49,7 +59,7 @@
 
             <div class="form-group">
                 <label for="odCyl">Cilíndrico:</label>
-                <input id="odCyl" name="odCyl" type="text" readonly value="0">
+                <input id="odCyl" name="odCyl" type="text" readonly value="0.00">
                 <div class="container_cyl_od">
                     <ul class="list_cyl_od"></ul>
                 </div>
@@ -57,38 +67,37 @@
 
             <div class="form-group">
                 <label for="odAxis">Eixo:</label>
-                <input id="odAxis" name="odAxis" type="text" readonly value="0">
+                <input id="odAxis" name="odAxis" type="text" readonly value="0.00">
                 <div class="container_axis_od">
                     <ul class="list_axis_od"></ul>
                 </div>
             </div>
         </div>
-        <h2>Olho esquerdo:</h2>
+        <h2 class="lens_type_label">Olho esquerdo:</h2>
         <div class="container_eyes">
 
             <div class="form-group">
                 <label for="osSph"> Esférico:</label>
-                <input id="osSph" name="osSph" type="text" readonly value="0">
+                <input id="osSph" name="osSph" type="text" readonly value="0.00">
                 <div class="container_sphere_os">
                     <ul class="list_sphere_os"></ul>
                 </div>
             </div>
             <div class="form-group">
                 <label for="osCyl"> Cilíndrico:</label>
-                <input id="osCyl" name="osCyl" type="text" readonly value="0">
+                <input id="osCyl" name="osCyl" type="text" readonly value="0.00">
                 <div class="container_cyl_os">
                     <ul class="list_cyl_os"></ul>
                 </div>
             </div>
             <div class="form-group">
                 <label for="osAxis"> Eixo:</label>
-                <input id="osAxis" name="osAxis" type="text" readonly value="0">
+                <input id="osAxis" name="osAxis" type="text" readonly value="0.00">
                 <div class="container_axis_os">
                     <ul class="list_axis_os"></ul>
                 </div>
             </div>
         </div>
-
         <button class="submit_button" type="submit">Converter</button>
     </form>
 

@@ -19,6 +19,9 @@ form {
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .form-group {
@@ -96,12 +99,14 @@ ul li:hover {
     cursor: pointer;
 }
 
-.form-radio {
+.radio_container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding-right: 20px;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    margin-bottom: 0;
 }
 
 .form-radio input {
@@ -120,10 +125,16 @@ ul li:hover {
 }
 
 .lens_type_label {
-    margin-right: 15px;
+    margin-bottom: 15px;
     font-size: 18px;
     font-weight: 600;
     color: #555;
+}
+
+.divisor {
+    width: 1px;
+    height: 20px;
+    background-color: #ccc;
 }
 
 .result {
@@ -156,8 +167,24 @@ ul li:hover {
     display: block;
 }
 
+#prescription {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 .empty {
     border: none !important;
+}
+
+.form-radio {
+    display: flex;
+    width: 160px;
+}
+
+.form-radio input {
+    width: max-content;
 }
 
 @media only screen and (max-width: 600px) {

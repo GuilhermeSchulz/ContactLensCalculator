@@ -15,7 +15,16 @@ function convertPrescription(
   function roundToNearestQuarter(value) {
     return Math.round(value * 4) / 4;
   }
-
+  function convertAxis() {
+    if (lensType === "Astigmatismo") {
+      if (odAxis) {
+        odAxis = Math.floor(odAxis / 10) * 10;
+      } else if (osAxis) {
+        osAxis = Math.ceil(osAxis / 10) * 10;
+      }
+    }
+  }
+  convertAxis();
   let convertedOdSph = convertSpherical(odSph, vertexDistance);
   let convertedOsSph = convertSpherical(osSph, vertexDistance);
 
@@ -47,6 +56,7 @@ document
     const lensType = document.querySelector(
       'input[name="lensType"]:checked'
     ).id;
+    const Presbiopia = document.getElementById("Presbiopia").checked;
 
     const converted = convertPrescription(
       odSph,
@@ -80,6 +90,12 @@ document
             <td>${converted.leftEye.cylindrical.toFixed(2)}</td>
             <td>${converted.leftEye.axis}</td>
         </tr>
+        <tr> 
+          <td><strong>Presbiopia:</strong></td>
+          <td>${Presbiopia ? "Sim" : "Não"}</td>
+        </tr>
+
+       
     </table>
     
 `;

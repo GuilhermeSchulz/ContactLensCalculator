@@ -1,31 +1,131 @@
-const miopia = spheres.filter((value) => value < 0);
-const hipermetropia = spheres.filter((value) => value > 0);
-const astigmatismo = CylindersNegatives.filter((value) => value < 0);
-
-let lensType = miopia;
+let lensType = "Miopia";
 function changeLensType() {
   const lensTypeRadios = document.querySelectorAll('input[name="lensType"]');
 
   lensTypeRadios.forEach((radio) => {
     radio.addEventListener("change", function () {
+      document.getElementById("odSph").value = "0.00";
+      document.getElementById("osSph").value = "0.00";
+      document.getElementById("odCyl").value = "0.00";
+      document.getElementById("osCyl").value = "0.00";
+      document.getElementById("odAxis").value = "0.00";
+      document.getElementById("osAxis").value = "0.00";
+      document.getElementById("Astigmatismo").checked
+        ? (document.getElementById("Astigmatismo").checked =
+            !document.getElementById("Astigmatismo").checked)
+        : (document.getElementById("Astigmatismo").checked =
+            document.getElementById("Astigmatismo").checked);
+
       const selectedLensType = document.querySelector(
         'input[name="lensType"]:checked'
       ).id;
 
-      renderOptions(
-        "odSph",
-        "container_sphere_od",
-        "list_sphere_od",
-        spheres,
-        selectedLensType
-      );
-      renderOptions(
-        "osSph",
-        "container_sphere_os",
-        "list_sphere_os",
-        spheres,
-        selectedLensType
-      );
+      if (document.getElementById("Astigmatismo").checked) {
+        renderOptions(
+          "odSph",
+          "container_sphere_od",
+          "list_sphere_od",
+          spheres,
+          "Astigmatismo"
+        );
+        renderOptions(
+          "osSph",
+          "container_sphere_os",
+          "list_sphere_os",
+          spheres,
+          "Astigmatismo"
+        );
+
+        renderOptions(
+          "odCyl",
+          "container_cyl_od",
+          "list_cyl_od",
+          CylindersNegatives,
+          "Astigmatismo"
+        );
+        renderOptions(
+          "osCyl",
+          "container_cyl_os",
+          "list_cyl_os",
+          CylindersNegatives,
+          "Astigmatismo"
+        );
+        renderOptions(
+          "odAxis",
+          "container_axis_od",
+          "list_axis_od",
+          axys,
+          "Astigmatismo"
+        );
+        renderOptions(
+          "osAxis",
+          "container_axis_os",
+          "list_axis_os",
+          axys,
+          "Astigmatismo"
+        );
+      } else {
+        // Renderizar as esferas e opções com o tipo de lente selecionado
+        renderOptions(
+          "odSph",
+          "container_sphere_od",
+          "list_sphere_od",
+          spheres,
+          selectedLensType
+        );
+        renderOptions(
+          "osSph",
+          "container_sphere_os",
+          "list_sphere_os",
+          spheres,
+          selectedLensType
+        );
+
+        renderOptions(
+          "odCyl",
+          "container_cyl_od",
+          "list_cyl_od",
+          CylindersNegatives,
+          selectedLensType
+        );
+        renderOptions(
+          "osCyl",
+          "container_cyl_os",
+          "list_cyl_os",
+          CylindersNegatives,
+          selectedLensType
+        );
+        renderOptions(
+          "odAxis",
+          "container_axis_od",
+          "list_axis_od",
+          axys,
+          selectedLensType
+        );
+        renderOptions(
+          "osAxis",
+          "container_axis_os",
+          "list_axis_os",
+          axys,
+          selectedLensType
+        );
+      }
+    });
+  });
+}
+
+changeLensType();
+const checkbox = document.querySelectorAll("input[type=checkbox]");
+checkbox.forEach((value) => {
+  value.addEventListener("change", function () {
+    document.getElementById("odSph").value = "0.00";
+    document.getElementById("osSph").value = "0.00";
+    document.getElementById("odCyl").value = "0.00";
+    document.getElementById("osCyl").value = "0.00";
+    document.getElementById("odAxis").value = "0.00";
+    document.getElementById("osAxis").value = "0.00";
+    const selectedLensType = value.id;
+    if (value.checked && selectedLensType === "Astigmatismo") {
       renderOptions(
         "odCyl",
         "container_cyl_od",
@@ -54,11 +154,31 @@ function changeLensType() {
         axys,
         selectedLensType
       );
-    });
+    } else {
+      document.querySelector(
+        ".list_axis_od"
+      ).innerHTML = `<span class="styled-option option_odAxis" id="option_odAxis_0" data-value="0.00">0.00</span>`;
+      document.querySelector(
+        ".list_axis_os"
+      ).innerHTML = `<span class="styled-option option_osAxis" id="option_osAxis_0" data-value="0.00">0.00</span>`;
+    }
+    if (value.checked && selectedLensType === "Presbiopia") {
+      const button = document.querySelector(".submit_button");
+      const title = document.createElement("h2");
+      title.innerText = "Prescrição da sua Presbiopia";
+      title.classList.add("lens_type_label");
+      const inputPres = document.createElement("input");
+      inputPres.type = "text";
+      inputPres.id = "prescription";
+      inputPres.placeholder = "Digite a prescrição";
+      inputPres.required = true;
+      button.insertAdjacentElement("beforebegin", inputPres);
+      inputPres.insertAdjacentElement("beforebegin", title);
+    } else {
+      document.getElementById("prescription").remove();
+    }
   });
-}
-
-changeLensType();
+});
 
 function renderOptions(
   inputId,
@@ -70,31 +190,42 @@ function renderOptions(
   const input = document.getElementById(inputId);
   const container = document.querySelector(`.${containerClass}`);
   const list = container.querySelector(`.${listClass}`);
-
-  input.addEventListener("click", function (event) {
-    if (!container.contains(event.target)) {
-      container.style.display = "block";
-    }
-  });
-
-  document.addEventListener("click", function (event) {
-    if (!container.contains(event.target) && event.target !== input) {
-      container.style.display = "none";
+  const inputSelected = document.querySelector("input[type=radio]:checked").id;
+  const checkbox = document.querySelectorAll("input[type=checkbox]");
+  let checked;
+  checkbox.forEach((value) => {
+    if (value.checked) {
+      checked = value.id;
     }
   });
 
   let opts = optionsArray.map((value) => {
     if (
-      (lensType === "Miopia" && value <= 0) ||
-      (lensType === "Hipermetropia" && value >= 0) ||
-      (lensType === "Astigmatismo" && value <= 0)
+      (lensType === "Miopia" && inputId.includes("Sph") && value <= 0) ||
+      (lensType === "Hipermetropia" && inputId.includes("Sph") && value >= 0)
     ) {
-      return `<span class="styled-option option_${inputId}" data-value="${value.toFixed(
+      return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
         2
       )}">${value.toFixed(2)}</span>`;
+    } else if (lensType === "Astigmatismo" && inputId.includes("Cyl")) {
+      if (inputSelected === "Miopia" && value <= 0) {
+        return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
+          2
+        )}">${value.toFixed(2)}</span>`;
+      } else if (inputSelected === "Hipermetropia" && value >= 0) {
+        return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
+          2
+        )}">${value.toFixed(2)}</span>`;
+      }
+    } else if (lensType === "Astigmatismo" && inputId.includes("Axis")) {
+      return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
+        2
+      )}">${value.toFixed(2)}º</span>`;
     }
   });
+
   opts = opts.filter((value) => value !== undefined);
+  list.innerHTML = "";
   opts.forEach((opt) => {
     list.insertAdjacentHTML("beforeend", opt);
   });
@@ -104,6 +235,21 @@ function renderOptions(
       input.value = styledOption.getAttribute("data-value");
       container.style.display = "none";
     });
+  });
+  input.addEventListener("click", function (event) {
+    if (!container.contains(event.target)) {
+      container.style.display = "block";
+      const zeroElement = document.getElementById(`option_${inputId}_0`);
+      if (zeroElement) {
+        list.scrollTop = zeroElement.offsetTop - 100;
+      }
+    }
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!container.contains(event.target) && event.target !== input) {
+      container.style.display = "none";
+    }
   });
 }
 
