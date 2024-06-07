@@ -13,40 +13,56 @@ function convertPrescription(
   }
 
   function roundToNearestQuarter(value) {
-    return Math.round(value * 4) / 4;
+    const quarter = 0.25;
+    return Math.round(value / quarter) * quarter;
+  }
+  function convertCyl() {
+    if (odCyl >= -0.75) {
+      odSph = odSph + odCyl / 2;
+      odCyl = 0;
+    }
+    if (osCyl >= -0.75) {
+      osSph = osSph + osCyl / 2;
+      osCyl = 0;
+    }
   }
   function convertAxis() {
     if (lensType === "Astigmatismo") {
-      if (odAxis) {
+      if (odAxis >= 0) {
         odAxis = Math.floor(odAxis / 10) * 10;
-      } else if (osAxis) {
+        if (odAxis <= 0) odAxis = 180;
+      }
+      if (osAxis >= 0) {
         osAxis = Math.ceil(osAxis / 10) * 10;
       }
     }
   }
-  convertAxis();
+  convertCyl();
   let convertedOdSph = convertSpherical(odSph, vertexDistance);
   let convertedOsSph = convertSpherical(osSph, vertexDistance);
+  let convertedOdCyl = roundToNearestQuarter(odCyl);
+  let convertedOsCyl = roundToNearestQuarter(osCyl);
+  convertAxis();
 
   return {
     rightEye: {
       spherical: roundToNearestQuarter(convertedOdSph),
-      cylindrical: odCyl,
+      cylindrical: convertedOdCyl,
       axis: odAxis,
     },
     leftEye: {
       spherical: roundToNearestQuarter(convertedOsSph),
-      cylindrical: osCyl,
+      cylindrical: convertedOsCyl,
       axis: osAxis,
     },
     lensType: lensType,
   };
 }
+
 document
   .getElementById("prescriptionForm")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-    let zero = 0;
     const odSph = parseFloat(document.getElementById("odSph").value) || 0;
     const odCyl = parseFloat(document.getElementById("odCyl").value) || 0;
     const odAxis = parseInt(document.getElementById("odAxis").value) || 0;

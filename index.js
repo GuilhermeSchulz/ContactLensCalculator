@@ -10,122 +10,26 @@ function changeLensType() {
       document.getElementById("osCyl").value = "0.00";
       document.getElementById("odAxis").value = "0.00";
       document.getElementById("osAxis").value = "0.00";
-      document.getElementById("Astigmatismo").checked
-        ? (document.getElementById("Astigmatismo").checked =
-            !document.getElementById("Astigmatismo").checked)
-        : (document.getElementById("Astigmatismo").checked =
-            document.getElementById("Astigmatismo").checked);
 
       const selectedLensType = document.querySelector(
         'input[name="lensType"]:checked'
       ).id;
 
-      if (document.getElementById("Astigmatismo").checked) {
-        renderOptions(
-          "odSph",
-          "container_sphere_od",
-          "list_sphere_od",
-          spheres,
-          "Astigmatismo"
-        );
-        renderOptions(
-          "osSph",
-          "container_sphere_os",
-          "list_sphere_os",
-          spheres,
-          "Astigmatismo"
-        );
+      renderOptions(
+        "odSph",
+        "container_sphere_od",
+        "list_sphere_od",
+        spheres,
+        selectedLensType
+      );
+      renderOptions(
+        "osSph",
+        "container_sphere_os",
+        "list_sphere_os",
+        spheres,
+        selectedLensType
+      );
 
-        renderOptions(
-          "odCyl",
-          "container_cyl_od",
-          "list_cyl_od",
-          CylindersNegatives,
-          "Astigmatismo"
-        );
-        renderOptions(
-          "osCyl",
-          "container_cyl_os",
-          "list_cyl_os",
-          CylindersNegatives,
-          "Astigmatismo"
-        );
-        renderOptions(
-          "odAxis",
-          "container_axis_od",
-          "list_axis_od",
-          axys,
-          "Astigmatismo"
-        );
-        renderOptions(
-          "osAxis",
-          "container_axis_os",
-          "list_axis_os",
-          axys,
-          "Astigmatismo"
-        );
-      } else {
-        // Renderizar as esferas e opções com o tipo de lente selecionado
-        renderOptions(
-          "odSph",
-          "container_sphere_od",
-          "list_sphere_od",
-          spheres,
-          selectedLensType
-        );
-        renderOptions(
-          "osSph",
-          "container_sphere_os",
-          "list_sphere_os",
-          spheres,
-          selectedLensType
-        );
-
-        renderOptions(
-          "odCyl",
-          "container_cyl_od",
-          "list_cyl_od",
-          CylindersNegatives,
-          selectedLensType
-        );
-        renderOptions(
-          "osCyl",
-          "container_cyl_os",
-          "list_cyl_os",
-          CylindersNegatives,
-          selectedLensType
-        );
-        renderOptions(
-          "odAxis",
-          "container_axis_od",
-          "list_axis_od",
-          axys,
-          selectedLensType
-        );
-        renderOptions(
-          "osAxis",
-          "container_axis_os",
-          "list_axis_os",
-          axys,
-          selectedLensType
-        );
-      }
-    });
-  });
-}
-
-changeLensType();
-const checkbox = document.querySelectorAll("input[type=checkbox]");
-checkbox.forEach((value) => {
-  value.addEventListener("change", function () {
-    document.getElementById("odSph").value = "0.00";
-    document.getElementById("osSph").value = "0.00";
-    document.getElementById("odCyl").value = "0.00";
-    document.getElementById("osCyl").value = "0.00";
-    document.getElementById("odAxis").value = "0.00";
-    document.getElementById("osAxis").value = "0.00";
-    const selectedLensType = value.id;
-    if (value.checked && selectedLensType === "Astigmatismo") {
       renderOptions(
         "odCyl",
         "container_cyl_od",
@@ -154,14 +58,22 @@ checkbox.forEach((value) => {
         axys,
         selectedLensType
       );
-    } else {
-      document.querySelector(
-        ".list_axis_od"
-      ).innerHTML = `<span class="styled-option option_odAxis" id="option_odAxis_0" data-value="0.00">0.00</span>`;
-      document.querySelector(
-        ".list_axis_os"
-      ).innerHTML = `<span class="styled-option option_osAxis" id="option_osAxis_0" data-value="0.00">0.00</span>`;
-    }
+    });
+  });
+}
+
+changeLensType();
+const checkbox = document.querySelectorAll("input[type=checkbox]");
+checkbox.forEach((value) => {
+  value.addEventListener("change", function () {
+    document.getElementById("odSph").value = "0.00";
+    document.getElementById("osSph").value = "0.00";
+    document.getElementById("odCyl").value = "0.00";
+    document.getElementById("osCyl").value = "0.00";
+    document.getElementById("odAxis").value = "0.00";
+    document.getElementById("osAxis").value = "0.00";
+    const selectedLensType = value.id;
+
     if (value.checked && selectedLensType === "Presbiopia") {
       const button = document.querySelector(".submit_button");
       const title = document.createElement("h2");
@@ -174,7 +86,7 @@ checkbox.forEach((value) => {
       inputPres.required = true;
       button.insertAdjacentElement("beforebegin", inputPres);
       inputPres.insertAdjacentElement("beforebegin", title);
-    } else {
+    } else if (!value.checked && selectedLensType === "Presbiopia") {
       document.getElementById("prescription").remove();
     }
   });
@@ -200,23 +112,14 @@ function renderOptions(
   });
 
   let opts = optionsArray.map((value) => {
-    if (
-      (lensType === "Miopia" && inputId.includes("Sph") && value <= 0) ||
-      (lensType === "Hipermetropia" && inputId.includes("Sph") && value >= 0)
-    ) {
+    if (inputId.includes("Sph")) {
       return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
         2
       )}">${value.toFixed(2)}</span>`;
     } else if (lensType === "Astigmatismo" && inputId.includes("Cyl")) {
-      if (inputSelected === "Miopia" && value <= 0) {
-        return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
-          2
-        )}">${value.toFixed(2)}</span>`;
-      } else if (inputSelected === "Hipermetropia" && value >= 0) {
-        return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
-          2
-        )}">${value.toFixed(2)}</span>`;
-      }
+      return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
+        2
+      )}">${value.toFixed(2)}</span>`;
     } else if (lensType === "Astigmatismo" && inputId.includes("Axis")) {
       return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
         2

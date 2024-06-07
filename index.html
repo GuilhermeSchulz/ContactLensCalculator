@@ -20,24 +20,17 @@
             <p class="lens_type_label">Tipo de Lente:</p>
 
             <div class="form-group radio_container">
-
                 <div class="form-radio">
-                    <input checked type="radio" name="lensType" id="Miopia">
-                    <label for="miopia">Miopia</label>
+                    <input checked type="radio" name="lensType" id="miopia/hipermetropia">
+                    <label for="miopia/hipermetropia">Miopia/Hipermetropia</label>
                 </div>
                 <span class="divisor"></span>
                 <div class="form-radio">
-                    <input type="radio" name="lensType" id="Hipermetropia">
-                    <label for="hipermetropia">Hipermetropia</label>
-                </div>
-
-            </div>
-            <div class="form-group radio_container" style="border-bottom: 1px solid #ccc">
-                <div class="form-radio">
-                    <input type="checkbox" name="Astigmatismo" id="Astigmatismo">
+                    <input type="radio" name="lensType" id="Astigmatismo">
                     <label for="Astigmatismo">Astigmatismo</label>
                 </div>
-                <span class="divisor"></span>
+            </div>
+            <div class="form-group radio_container" style="border-bottom: 1px solid #ccc">
                 <div class="form-radio">
                     <input type="checkbox" name="Presbiopia" id="Presbiopia">
                     <label for="Presbiopia">Presbiopia</label>
@@ -103,6 +96,44 @@
 
     <div class="result" id="result">
         <h2>Prescrição Convertida:</h2>
+        <div>
+            <h2 class="lens_type_label">Olho direito:</h2>
+            <div>
+                <div class="form-group">
+                    <label for="ODcontactLensSphere"> Esférico:</label>
+                    <input type="text" readonly id="ODcontactLensSphere">
+                </div>
+                <div class="form-group">
+
+                    <label for="ODcontactLensCylinder">Cilíndrico:</label>
+                    <input type="text" readonly id="ODcontactLensCylinder">
+                </div>
+                <div class="form-group">
+                    <label for="ODcontactLensAxis">Eixo:</label>
+                    <input type="text" readonly id="ODcontactLensAxis">
+                </div>
+
+            </div>
+            <h2 class="lens_type_label">Olho esquerdo:</h2>
+            <div>
+                <div class="form-group">
+                    <label for="OScontactLensSphere"> Esférico:</label>
+
+                    <input type="text" readonly id="OScontactLensSphere">
+                </div>
+                <div class="form-group">
+                    <label for="OScontactLensCylinder">Cilíndrico:</label>
+
+                    <input type="text" readonly id="OScontactLensCylinder">
+                </div>
+                <div class="form-group">
+                    <label for="OScontactLensAxis">Eixo:</label>
+
+                    <input type="text" readonly id="OScontactLensAxis">
+                </div>
+            </div>
+
+        </div>
     </div>
 </body>
 
