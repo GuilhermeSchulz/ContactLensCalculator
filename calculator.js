@@ -20,10 +20,14 @@ function convertPrescription(
     if (odCyl >= -0.75) {
       odSph = odSph + odCyl / 2;
       odCyl = 0;
+    } else if (odCyl % 1 === 0 || odCyl % 0.5 === 0) {
+      odCyl = odCyl + 0.25;
     }
     if (osCyl >= -0.75) {
       osSph = osSph + osCyl / 2;
       osCyl = 0;
+    } else if (osCyl % -1 === 0 || osCyl % -0.5 === 0) {
+      osCyl = osCyl + 0.25;
     }
   }
   function convertAxis() {
@@ -86,36 +90,61 @@ document
     );
 
     document.getElementById("result").innerHTML = `
-    <p><strong>Tipo de Lente:</strong> ${converted.lensType}</p>
+
     <h2>Prescrição Convertida:</h2>
-    <table>
-        <tr>
-            <th class="empty"></th>
-            <th>Esférico</th>
-            <th>Cilíndrico</th>
-            <th>Eixo</th>
-        </tr>
-        <tr>
-            <td><strong>OD (Olho Direito):</strong></td>
-            <td>${converted.rightEye.spherical.toFixed(2)}</td>
-            <td>${converted.rightEye.cylindrical.toFixed(2)}</td>
-            <td>${converted.rightEye.axis}</td>
-        </tr>
-        <tr>
-            <td><strong>OS (Olho Esquerdo):</strong></td>
-            <td>${converted.leftEye.spherical.toFixed(2)}</td>
-            <td>${converted.leftEye.cylindrical.toFixed(2)}</td>
-            <td>${converted.leftEye.axis}</td>
-        </tr>
-        <tr> 
-          <td><strong>Presbiopia:</strong></td>
-          <td>${Presbiopia ? "Sim" : "Não"}</td>
-          <td>${prescription ? prescription.value : ""}</td>
+    <div>
+        <h2 class="lens_type_label">Olho direito:</h2>
+        <div>
+            <div class="form-group">
+                <label for="ODcontactLensSphere"> Esférico:</label>
+                <input type="text" value="${converted.rightEye.spherical.toFixed(
+                  2
+                )}" readonly disabled id="ODcontactLensSphere">
+            </div>
+            <div class="form-group">
 
-        </tr>
+                <label for="ODcontactLensCylinder">Cilíndrico:</label>
+                <input type="text" value="${converted.rightEye.cylindrical.toFixed(
+                  2
+                )}" readonly disabled id="ODcontactLensCylinder">
+            </div>
+            <div class="form-group">
+                <label for="ODcontactLensAxis">Eixo:</label>
+                <input type="text" value="${
+                  converted.rightEye.axis
+                }" readonly disabled id="ODcontactLensAxis">
+            </div>
 
-       
-    </table>
-    
+        </div>
+        <h2 class="lens_type_label">Olho esquerdo:</h2>
+        <div>
+            <div class="form-group">
+                <label for="OScontactLensSphere"> Esférico:</label>
+
+                <input type="text" value="${converted.leftEye.spherical.toFixed(
+                  2
+                )}" readonly disabled id="OScontactLensSphere">
+            </div>
+            <div class="form-group">
+                <label for="OScontactLensCylinder">Cilíndrico:</label>
+
+                <input type="text" value="${converted.leftEye.cylindrical.toFixed(
+                  2
+                )}" readonly disabled id="OScontactLensCylinder">
+            </div>
+            <div class="form-group">
+                <label for="OScontactLensAxis">Eixo:</label>
+
+                <input type="text" value="${
+                  converted.leftEye.axis
+                }" readonly disabled id="OScontactLensAxis">
+            </div>
+        </div>
+        ${
+          prescription
+            ? `<p><strong>Prescrição de Presbiopia:</strong> ${prescription.value}</p>`
+            : ""
+        }
+    </div>
 `;
   });

@@ -77,6 +77,7 @@ checkbox.forEach((value) => {
     if (value.checked && selectedLensType === "Presbiopia") {
       const button = document.querySelector(".submit_button");
       const title = document.createElement("h2");
+      title.id = "presbiopia_title";
       title.innerText = "Prescrição da sua Presbiopia";
       title.classList.add("lens_type_label");
       const inputPres = document.createElement("input");
@@ -88,6 +89,7 @@ checkbox.forEach((value) => {
       inputPres.insertAdjacentElement("beforebegin", title);
     } else if (!value.checked && selectedLensType === "Presbiopia") {
       document.getElementById("prescription").remove();
+      document.getElementById("presbiopia_title").remove();
     }
   });
 });
