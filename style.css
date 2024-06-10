@@ -27,6 +27,7 @@ form {
 .form-group {
     margin-bottom: 20px;
     position: relative;
+    width: 100%;
 }
 
 .form-group label {
@@ -172,6 +173,10 @@ ul li:hover {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.hide_astigmatism {
+    display: none;
 }
 
 .empty {

@@ -6,15 +6,29 @@ function changeLensType() {
     radio.addEventListener("change", function () {
       document.getElementById("odSph").value = "0.00";
       document.getElementById("osSph").value = "0.00";
-      document.getElementById("odCyl").value = "0.00";
-      document.getElementById("osCyl").value = "0.00";
-      document.getElementById("odAxis").value = "0.00";
-      document.getElementById("osAxis").value = "0.00";
+      if (document.getElementById("odCyl"))
+        document.getElementById("odCyl").value = "0.00";
+      if (document.getElementById("osCyl"))
+        document.getElementById("osCyl").value = "0.00";
+      if (document.getElementById("odAxis"))
+        document.getElementById("odAxis").value = "0";
+      if (document.getElementById("osAxis"))
+        document.getElementById("osAxis").value = "0";
 
       const selectedLensType = document.querySelector(
         'input[name="lensType"]:checked'
       ).id;
-
+      if (selectedLensType === "Astigmatismo") {
+        const inputInvis = document.querySelectorAll(".astig");
+        inputInvis.forEach((value) => {
+          value.classList.remove("hide_astigmatism");
+        });
+      } else {
+        const inputInvis = document.querySelectorAll(".astig");
+        inputInvis.forEach((value) => {
+          value.classList.add("hide_astigmatism");
+        });
+      }
       renderOptions(
         "odSph",
         "container_sphere_od",
@@ -42,20 +56,6 @@ function changeLensType() {
         "container_cyl_os",
         "list_cyl_os",
         CylindersNegatives,
-        selectedLensType
-      );
-      renderOptions(
-        "odAxis",
-        "container_axis_od",
-        "list_axis_od",
-        axys,
-        selectedLensType
-      );
-      renderOptions(
-        "osAxis",
-        "container_axis_os",
-        "list_axis_os",
-        axys,
         selectedLensType
       );
     });
@@ -115,9 +115,15 @@ function renderOptions(
 
   let opts = optionsArray.map((value) => {
     if (inputId.includes("Sph")) {
-      return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
-        2
-      )}">${value.toFixed(2)}</span>`;
+      if (value > 0) {
+        return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
+          2
+        )}">+${value.toFixed(2)}</span>`;
+      } else {
+        return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
+          2
+        )}">${value.toFixed(2)}</span>`;
+      }
     } else if (lensType === "Astigmatismo" && inputId.includes("Cyl")) {
       return `<span class="styled-option option_${inputId}" id="option_${inputId}_${value}" data-value="${value.toFixed(
         2
@@ -186,5 +192,3 @@ renderOptions(
   CylindersNegatives,
   "Miopia"
 );
-renderOptions("odAxis", "container_axis_od", "list_axis_od", axys, "Miopia");
-renderOptions("osAxis", "container_axis_os", "list_axis_os", axys, "Miopia");

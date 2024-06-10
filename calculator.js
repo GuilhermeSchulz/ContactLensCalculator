@@ -69,10 +69,18 @@ document
     event.preventDefault();
     const odSph = parseFloat(document.getElementById("odSph").value) || 0;
     const odCyl = parseFloat(document.getElementById("odCyl").value) || 0;
-    const odAxis = parseInt(document.getElementById("odAxis").value) || 0;
-    const osSph = parseFloat(document.getElementById("osSph").value) || 0;
-    const osCyl = parseFloat(document.getElementById("osCyl").value) || 0;
-    const osAxis = parseInt(document.getElementById("osAxis").value) || 0;
+    const odAxis = document.getElementById("odAxis")
+      ? parseInt(document.getElementById("odAxis").value)
+      : 0;
+    const osSph = document.getElementById("osSph")
+      ? parseFloat(document.getElementById("osSph").value)
+      : 0;
+    const osCyl = document.getElementById("osCyl")
+      ? parseFloat(document.getElementById("osCyl").value)
+      : 0;
+    const osAxis = document.getElementById("osAxis")
+      ? parseInt(document.getElementById("osAxis").value)
+      : 0;
     const prescription = document.getElementById("prescription");
     const lensType = document.querySelector(
       'input[name="lensType"]:checked'
@@ -99,20 +107,24 @@ document
                 <label for="ODcontactLensSphere"> Esférico:</label>
                 <input type="text" value="${converted.rightEye.spherical.toFixed(
                   2
-                )}" readonly disabled id="ODcontactLensSphere">
+                )}"  id="ODcontactLensSphere">
             </div>
-            <div class="form-group">
+            <div class="form-group astig ${
+              lensType === "Astigmatismo" ? "" : "hide_astigmatism"
+            }">
 
                 <label for="ODcontactLensCylinder">Cilíndrico:</label>
                 <input type="text" value="${converted.rightEye.cylindrical.toFixed(
                   2
-                )}" readonly disabled id="ODcontactLensCylinder">
+                )}"  id="ODcontactLensCylinder">
             </div>
-            <div class="form-group">
+            <div class="form-group astig ${
+              lensType === "Astigmatismo" ? "" : "hide_astigmatism"
+            }">
                 <label for="ODcontactLensAxis">Eixo:</label>
-                <input type="text" value="${
+                <input type="number" max="180" min="0" step="1" value="${
                   converted.rightEye.axis
-                }" readonly disabled id="ODcontactLensAxis">
+                }"  id="ODcontactLensAxis">
             </div>
 
         </div>
@@ -123,21 +135,25 @@ document
 
                 <input type="text" value="${converted.leftEye.spherical.toFixed(
                   2
-                )}" readonly disabled id="OScontactLensSphere">
+                )}"  id="OScontactLensSphere">
             </div>
-            <div class="form-group">
+            <div class="form-group astig ${
+              lensType === "Astigmatismo" ? "" : "hide_astigmatism"
+            }">
                 <label for="OScontactLensCylinder">Cilíndrico:</label>
 
                 <input type="text" value="${converted.leftEye.cylindrical.toFixed(
                   2
-                )}" readonly disabled id="OScontactLensCylinder">
+                )}"  id="OScontactLensCylinder">
             </div>
-            <div class="form-group">
+            <div class="form-group astig ${
+              lensType === "Astigmatismo" ? "" : "hide_astigmatism"
+            }">
                 <label for="OScontactLensAxis">Eixo:</label>
 
-                <input type="text" value="${
+                <input  type="number" max="180" min="0" step="1" value="${
                   converted.leftEye.axis
-                }" readonly disabled id="OScontactLensAxis">
+                }"  id="OScontactLensAxis">
             </div>
         </div>
         ${

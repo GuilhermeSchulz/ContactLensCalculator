@@ -35,7 +35,6 @@
                     <input type="checkbox" name="Presbiopia" id="Presbiopia">
                     <label for="Presbiopia">Presbiopia</label>
                 </div>
-
             </div>
         </div>
         <h2 class="lens_type_label">Olho direito:</h2>
@@ -50,7 +49,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group astig hide_astigmatism">
                 <label for="odCyl">Cilíndrico:</label>
                 <input id="odCyl" name="odCyl" type="text" readonly value="0.00">
                 <div class="container_cyl_od">
@@ -58,12 +57,10 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group astig hide_astigmatism">
                 <label for="odAxis">Eixo:</label>
-                <input id="odAxis" name="odAxis" type="text" readonly value="0.00">
-                <div class="container_axis_od">
-                    <ul class="list_axis_od"></ul>
-                </div>
+                <input id="odAxis" name="odAxis" type="number" max="180" min="0" value="0" step="1">
+
             </div>
         </div>
         <h2 class="lens_type_label">Olho esquerdo:</h2>
@@ -76,19 +73,17 @@
                     <ul class="list_sphere_os"></ul>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group astig hide_astigmatism">
                 <label for="osCyl"> Cilíndrico:</label>
                 <input id="osCyl" name="osCyl" type="text" readonly value="0.00">
                 <div class="container_cyl_os">
                     <ul class="list_cyl_os"></ul>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group astig hide_astigmatism">
                 <label for="osAxis"> Eixo:</label>
-                <input id="osAxis" name="osAxis" type="text" readonly value="0.00">
-                <div class="container_axis_os">
-                    <ul class="list_axis_os"></ul>
-                </div>
+                <input id="osAxis" name="osAxis" type="number" max="180" value="0" min="0" step="1">
+
             </div>
         </div>
         <button class="submit_button" type="submit">Converter</button>
@@ -101,16 +96,16 @@
             <div>
                 <div class="form-group">
                     <label for="ODcontactLensSphere"> Esférico:</label>
-                    <input type="text" readonly disabled id="ODcontactLensSphere">
+                    <input type="text" id="ODcontactLensSphere">
                 </div>
-                <div class="form-group">
+                <div class="form-group astig hide_astigmatism">
 
                     <label for="ODcontactLensCylinder">Cilíndrico:</label>
-                    <input type="text" readonly disabled id="ODcontactLensCylinder">
+                    <input type="text" id="ODcontactLensCylinder">
                 </div>
-                <div class="form-group">
+                <div class="form-group astig hide_astigmatism">
                     <label for="ODcontactLensAxis">Eixo:</label>
-                    <input type="text" readonly disabled id="ODcontactLensAxis">
+                    <input type="number" max="180" min="0" step="1" type="text" id="ODcontactLensAxis">
                 </div>
 
             </div>
@@ -119,17 +114,17 @@
                 <div class="form-group">
                     <label for="OScontactLensSphere"> Esférico:</label>
 
-                    <input type="text" readonly disabled id="OScontactLensSphere">
+                    <input type="text" id="OScontactLensSphere">
                 </div>
-                <div class="form-group">
+                <div class="form-group astig hide_astigmatism">
                     <label for="OScontactLensCylinder">Cilíndrico:</label>
 
-                    <input type="text" readonly disabled id="OScontactLensCylinder">
+                    <input type="text" id="OScontactLensCylinder">
                 </div>
-                <div class="form-group">
+                <div class="form-group astig hide_astigmatism">
                     <label for="OScontactLensAxis">Eixo:</label>
 
-                    <input type="text" readonly disabled id="OScontactLensAxis">
+                    <input type="number" max="180" min="0" step="1" type="text" id="OScontactLensAxis">
                 </div>
             </div>
 
